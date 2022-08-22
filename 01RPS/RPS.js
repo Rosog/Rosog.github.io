@@ -11,7 +11,6 @@ var drawScoreEl = document.querySelector(".drw_score");
 var playerScore = 0;
 var compScore = 0;
 var drawScore = 0;
-
 var compChoice = "";
 var userChoice = "";
 
@@ -29,18 +28,11 @@ function removeEvents() {
     scissorsChoice.removeEventListener("click", eventInnerScissors);
 }
 
-function getCompChoice() {
-    compChoice = choices[Math.floor(Math.random() * 3)];
-    console.log(compChoice);
-}
-
 function winCheck() {
-
     if (userChoice == compChoice) {
         drawScore++;
         return "Computer Chose "+compChoice+" | Draw!";
-    }
-    
+    }    
     if (userChoice == choices[0] && compChoice == choices[2]) {
         playerScore++;
         return "Computer Chose "+compChoice+" | Player Wins!";
@@ -54,7 +46,6 @@ function winCheck() {
         compScore++;
         return "Computer Chose "+compChoice+" | Computer Wins!";;
     }
-
 }
 
 function setStatus(status) {
@@ -72,30 +63,30 @@ function updateDisplayScore() {
     drawScoreEl.innerHTML = drawScore;
 }
 
-function mainLoop() {
-    getCompChoice();
+function main() {
+    compChoice = choices[Math.floor(Math.random() * 3)];
     let newStatus = winCheck();
     setStatus(newStatus);
     updateDisplayScore();
-    setTimeout(nextRound, 3000);
+    setTimeout(nextRound, 2000);
 }
 
 function eventInnerRock() {
     userChoice = choices[0]; 
     removeEvents();
-    mainLoop();
+    main();
 }
 
 function eventInnerPaper() {
     userChoice = choices[1]; 
     removeEvents();
-    mainLoop();
+    main();
 }
 
 function eventInnerScissors() {
     userChoice = choices[2]; 
     removeEvents();
-    mainLoop();
+    main();
 }
 
 addEvents();
